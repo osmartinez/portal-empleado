@@ -1,0 +1,190 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Ver</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each solicitudes}}
+        <tr>
+            <td>{{timeAgo this.created_at}}</td>
+            <td>{{this.dni}}</td>
+            <td>{{this.name}}</td>
+
+
+            <td>
+                <button style="min-width: 50px;" data-toggle="modal" data-target="#myModal{{this.user_id}}"
+                    class="btn btn-success">
+                    <i class="fas fa-check-circle" style="pointer-events:none" aria-hidden="true"></i>
+                </button>
+            </td>
+
+            <!-- The Modal -->
+            <div class="modal" id="myModal{{this.user_id}}" data-backdrop="false">
+                <div class="modal-dialog modal-lg modal-dialog-centered" style="z-index: 1500;">
+                    <div class="modal-content" style="width:980px;">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Cambio de información</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <main class="my-form">
+                                <div class="cotainer">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-10">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form name="my-form" onsubmit="return validform()"
+                                                        action="success.php" method="">
+                                                        <div class="form-group row">
+                                                            <label for="full_name"
+                                                                class="col-md-4 col-form-label text-md-right"><abbr
+                                                                    title="Número de cuenta bancaria">IBAN</abbr></label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="iban" value="{{this.iban}}"
+                                                                    class="form-control" name="iban">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="email_address"
+                                                                class="col-md-4 col-form-label text-md-right">País</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="country" value="{{this.country}}"
+                                                                    class="form-control" name="country">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="user_name"
+                                                                class="col-md-4 col-form-label text-md-right">Región</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="region" value="{{this.region}}"
+                                                                    class="form-control" name="region">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="phone_number"
+                                                                class="col-md-4 col-form-label text-md-right">Código
+                                                                postal</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="zip" value="{{this.zip}}"
+                                                                    name="zip" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="present_address"
+                                                                class="col-md-4 col-form-label text-md-right">Ciudad</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="city" name="city"
+                                                                    value="{{this.city}}" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address"
+                                                                class="col-md-4 col-form-label text-md-right">Vía</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="street" class="form-control"
+                                                                    value="{{this.street}}" name="street">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="nid_number"
+                                                                class="col-md-4 col-form-label text-md-right"><abbr
+                                                                    title="Número del portal">Portal</abbr></label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="gate" value="{{this.gate}}"
+                                                                    class="form-control" name="gate">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address"
+                                                                class="col-md-4 col-form-label text-md-right">Planta</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="floor" value="{{this.floor}}"
+                                                                    class="form-control" name="floor">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address"
+                                                                class="col-md-4 col-form-label text-md-right">Puerta</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="door" value="{{this.door}}"
+                                                                    class="form-control" name="door">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address"
+                                                                class="col-md-4 col-form-label text-md-right">Tfno.
+                                                                móvil</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="phone" value="{{this.phone}}"
+                                                                    class="form-control" name="phone">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label for="permanent_address"
+                                                                class="col-md-4 col-form-label text-md-right">Tfno.
+                                                                fijo</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" id="phone2" value="{{this.phone2}}"
+                                                                    class="form-control" name="phone2">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 offset-md-4">
+                                                            <div class="btn-group" role="group"
+                                                                aria-label="Basic example">
+                                                                <button
+                                                                    class="btn btn-success" >
+                                                                    <i class="fas fa-check-circle"
+                                                                        style="pointer-events:none"
+                                                                        aria-hidden="true"></i>
+                                                                        Confirmar
+                                                                </button>
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    <i class="fas fa-window-close"></i>
+                                                                    Rechazar
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                        </main>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <!--div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div-->
+
+                </div>
+            </div>
+            </div>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

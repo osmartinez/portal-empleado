@@ -1,0 +1,54 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Asunto</th>
+            <th scope="col">Ver/Marcar leído</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each sugerencias}}
+        <tr>
+            <td>{{timeAgo this.created_at}}</td>
+            <td>{{this.subject}}</td>
+
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button style="min-width: 50px;" data-toggle="modal" data-target="#myModal{{this.id}}" class="btn btn-success">
+                        <i class="fas fa-check-circle" style="pointer-events:none" aria-hidden="true"></i>
+                    </button>
+                    <button style="min-width: 50px;" id="btMarcarLeido{{this.id}}"
+                        class="btn btn-warning" {{#if this.blocked}} disabled {{/if}}>
+                        <i class="fas fa-eye" style="pointer-events:none" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </td>
+
+            <!-- The Modal -->
+            <div  class="modal" id="myModal{{this.id}}" data-backdrop="false">
+                <div class="modal-dialog" style="z-index: 1500;">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{this.subject}}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            {{this.body}}
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

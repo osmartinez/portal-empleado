@@ -1,0 +1,96 @@
+<nav class="fixed-left" id="sidebar">
+
+  <div class="sidebar-header">
+    <h4>Portal del empleado</h4>
+  </div>
+
+
+  <ul class="list-unstyled components">
+    <img src="http://arneplant.com/wp-content/uploads/2018/09/logo-arneplant-horizontal.svg" height="40" />
+    {{#if user}}
+    <p style="font-size: 80%"><i class="fas fa-user" style="margin-right: 4px"></i><b>{{user.Name}} {{user.Surname}}</b>
+    </p>
+
+    <li class="active">
+      <a href="/dashboard">
+        <i class="fas fa-home"></i>
+        Inicio
+      </a>
+    </li>
+    <li>
+      <a href="/dashboard/info_personal">
+        <i class="fas fa-user"></i>
+        Mi info. personal</a>
+    </li>
+    <li>
+      <a href="#subMenuCalendario" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-calendar-alt"></i>
+        Mi calendario
+      </a>
+      <ul class="collapse list-unstyled" id="subMenuCalendario">
+        <li>
+          <a href="#">Fichajes</a>
+        </li>
+        <li>
+          <a href="#">Solicitud ausencia</a>
+        </li>
+        <li>
+          <a href="#">
+            Calendario laboral
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="/dashboard/nominas">
+        <i class="fas fa-copy"></i>
+        Mis nóminas</a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fas fa-envelope"></i>
+        Mensajes</a>
+    </li>
+  </ul>
+
+  {{#if user.IsRRHH}}
+  <ul class="list-unstyled components">
+    <li>
+      <a href="#subMenuRRHH" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+        <i class="fas fa-key"></i>
+        Administración RRHH
+      </a>
+      <ul class="collapse list-unstyled" id="subMenuRRHH">
+        <li>
+          <a href="/rrhh/nuevo_empleado"><i class="fas fa-plus-circle"></i>
+          Nuevo empleado</a>
+        </li>
+        <li>
+          <a href="/rrhh/gestionar_empleados"><i class="fas fa-tasks"></i>
+          Gestión empleados</a>
+        </li>
+        <li>
+          <a href="/rrhh/tablon_sugerencias"><i class="fas fa-inbox"></i>
+          Buzón de sugerencias</a>
+        </li>
+        <li>
+          <a href="/rrhh/solicitudes_cambio_info"><i class="fas fa-exchange-alt"></i>
+          Solicitudes info. personal</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  {{/if}}
+
+  <ul class="list-unstyled CTAs">
+
+    <li>
+      <a href="/dashboard/sugerencias" class="article"><i class="fas fa-paper-plane"></i>Sugerencias</a>
+    </li>
+    <li>
+      <a href="/auth/logout" class="download"> <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </li>
+  </ul>
+  {{/if}}
+
+</nav>

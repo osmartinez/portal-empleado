@@ -1,0 +1,99 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">DNI</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Activa/Restringe/Bloquea</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users}}
+        <tr>
+            <td>{{this.DNI}}</td>
+            <td>{{this.Name}}</td>
+
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button style="min-width: 50px;" id="btActivar{{this.id}}" onclick="activar('{{this.Id}}')"
+                        class="btn btn-success" {{#if this.active}} disabled {{/if}}>
+                        <i class="fas fa-check-circle" style="pointer-events:none" aria-hidden="true"></i>
+                    </button>
+                    <button style="min-width: 50px;" id="btBloquear{{this.id}}" onclick="bloquear('{{this.Id}}')"
+                        class="btn btn-warning" {{#if this.blocked}} disabled {{/if}}>
+                        <i class="fas fa-ban" style="pointer-events:none" aria-hidden="true"></i>
+                    </button>
+                    <button style="min-width: 50px;" id="btSuspender{{this.id}}" onclick="suspender('{{this.Id}}')"
+                        class="btn btn-danger" {{#if this.banned}} disabled {{/if}}>
+                        <i class="fas fa-ban" style="pointer-events:none" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script>
+
+    function bloquear(id) {
+        let source = event.target || event.srcElement;
+        let btActivar = document.getElementById('btActivar' + id)
+        let btSuspender = document.getElementById('btSuspender' + id)
+        $.ajax({
+            type: "POST",
+            url: "/rrhh/gestionar_empleados/bloquear",
+            data: { id: id },
+            success: (res) => {
+                if (res) {
+                    console.log(source)
+                    btActivar.disabled = false
+                    btSuspender.disabled = false
+                    source.disabled = true
+                }
+
+            },
+            dataType: 'text'
+        })
+    }
+
+    function activar(id) {
+        let source = event.target || event.srcElement;
+        let btBloquear = document.getElementById('btBloquear' + id)
+        let btSuspender = document.getElementById('btSuspender' + id)
+        $.ajax({
+            type: "POST",
+            url: "/rrhh/gestionar_empleados/activar",
+            data: { id: id },
+            success: (res) => {
+                if (res) {
+                    source.disabled = true
+                    btBloquear.disabled = false
+                    btSuspender.disabled = false
+                    console.log(source)
+                }
+            },
+            dataType: 'text'
+        })
+    }
+
+    function suspender(id) {
+        let source = event.target || event.srcElement;
+        let btActivar = document.getElementById('btActivar' + id)
+        let btBloquear = document.getElementById('btBloquear' + id)
+        $.ajax({
+            type: "POST",
+            url: "/rrhh/gestionar_empleados/suspender",
+            data: { id: id },
+            success: (res) => {
+                if (res) {
+                    console.log(source)
+                    source.disabled = true
+                    btBloquear.disabled = false
+                    btActivar.disabled = false
+                }
+
+            },
+            dataType: 'text'
+        })
+    }
+</script>

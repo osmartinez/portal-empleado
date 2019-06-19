@@ -1,0 +1,81 @@
+    {{#if message}}
+    {{>message}}
+    {{/if}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3>Registro</h3>
+        </div>
+        <div class="card-body">
+          <form action="/rrhh/nuevo_empleado" method="POST">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Nombre" class="form-control" id="inputNom" autofocus required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="surname" placeholder="Apellidos" class="form-control" id="inputApe" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="dni" placeholder="DNI" class="form-control" id="inputDni" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Usuario" class="form-control" id="inputUname" required>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" name="password" id="inputPwd" placeholder="Contraseña" required>
+              <span class="input-group-btn" style="margin-left: 2px">
+                <button type="button" class="btn btn-primary" onclick='generaPassword()'>Generar</button>
+              </span>
+            </div>
+            <button class="btn btn-success btn-block" style="margin-top: 10px">
+              Registrar
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function generaPassword() {
+    const randomstring = Math.random().toString(36).slice(-10);
+    const input = document.getElementById('inputPwd')
+    input.value = randomstring
+  }
+
+  const nombre = document.getElementById("inputNom")
+  const ape = document.getElementById("inputApe")
+  const dni = document.getElementById("inputDni")
+  const uname = document.getElementById("inputUname")
+
+  function is_not_empty(str) {
+    return str !== null && str.trim().length > 0
+  }
+
+  nombre.onblur = ape.onblur = dni.onblur = () => {
+    const nombre_text = nombre.value
+    const ape_text = ape.value
+    var iniciales = ''
+
+    var nombre_troceado = nombre_text.split(' ')
+    if (nombre_troceado.length == 1) {
+      iniciales = nombre_text.substring(0, 2)
+    }
+    else {
+      for (trozo of nombre_troceado) {
+        iniciales += trozo[0]
+      }
+    }
+
+    if (is_not_empty(nombre_text) && is_not_empty(ape_text)) {
+      uname.value = iniciales.toLowerCase() + ape_text.split(' ')[0].toLowerCase()
+    }
+    else {
+      uname.value = ''
+    }
+  }
+
+</script>
