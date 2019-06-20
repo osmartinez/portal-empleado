@@ -10,9 +10,15 @@ router.get('/',isLoggedIn,checkFirstLogin,(req,res)=>{
     res.render('dashboard/index',{title: 'Portal web'})
 })
 
+// rutas calendario
+router.get('/calendario',isLoggedIn,checkFirstLogin,(req,res)=>{
+    res.render('dashboard/calendario/index',{title: 'Calendario'})
+})
+// fin rutas calendario
+
 // rutas mail
 router.get('/mail',isLoggedIn,checkFirstLogin,(req,res)=>{
-    res.render('dashboard/mail/mail',{title: 'Mensajería'})
+    res.render('dashboard/mail/index',{title: 'Mensajería'})
 })
 // fin rutas mail
 

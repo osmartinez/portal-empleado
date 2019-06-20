@@ -85,7 +85,7 @@ router.get('/tablon_sugerencias', isRRHH, checkFirstLogin, async (req, res) => {
 // inicio solicitudes cambio info
 router.get('/solicitudes_cambio_info', isRRHH, checkFirstLogin, async (req, res) => {
     const solicitudes = []
-    res.render('rrhh/solicitudes_cambio_info', { title: 'Sugerencias', solicitudes: solicitudes })
+    res.render('rrhh/solicitudes_cambio_info', { title: 'Rectificación', solicitudes: solicitudes })
 })
 // fin solicitudes
 module.exports = router

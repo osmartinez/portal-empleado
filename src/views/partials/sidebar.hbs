@@ -1,96 +1,122 @@
-<nav class="fixed-left" id="sidebar">
+{{#if user}}
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        {{#if user.IsMale}}
+        <img src="/img/avatar5.png" class="img-circle" alt="User Image">
+        {{else}}
+        <img src="/img/avatar3.png" class="img-circle" alt="User Image">
+        {{/if }} </div>
+      <div class="pull-left info">
+        <p>{{user.Name}} {{user.Surname}}</p>
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+    <!-- search form -->
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header">MENÚ PRINCIPAL</li>
 
-  <div class="sidebar-header">
-    <h4>Portal del empleado</h4>
-  </div>
+      <li>
+        <a href="/dashboard/info_personal">
+          <i class="fa fa-user-circle-o"></i> <span>Mis datos</span>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li>
 
+      <li>
+        <a href="/dashboard/nominas">
+          <i class="fa fa-files-o"></i> <span>Mis nóminas</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-green">4</small>
+          </span>
+        </a>
+      </li>
 
-  <ul class="list-unstyled components">
-    <img src="http://arneplant.com/wp-content/uploads/2018/09/logo-arneplant-horizontal.svg" height="40" />
-    {{#if user}}
-    <p style="font-size: 80%"><i class="fas fa-user" style="margin-right: 4px"></i><b>{{user.Name}} {{user.Surname}}</b>
-    </p>
+      <li>
+        <a href="/dashboard/calendario">
+          <i class="fa fa-calendar"></i> <span>Mi calendario</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-red">3</small>
+            <small class="label pull-right bg-blue">17</small>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/mail">
+          <i class="fa fa-envelope"></i> <span>Mensajes</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-yellow">12</small>
+            <small class="label pull-right bg-green">16</small>
+            <small class="label pull-right bg-red">5</small>
+          </span>
+        </a>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-folder"></i> <span>Documentación</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="#"><i class="fa fa-circle-o"></i> Contrato</a></li>
+          <li><a href="#"><i class="fa fa-circle-o"></i> Diplomas</a></li>
+          <li><a href="#"><i class="fa fa-circle-o"></i> Partes de baja</a></li>
+          <li><a href="#"><i class="fa fa-circle-o"></i> Informes médicos</a></li>
+          <li><a href="#"><i class="fa fa-circle-o"></i> Informes de aptitud</a></li>
 
-    <li class="active">
-      <a href="/dashboard">
-        <i class="fas fa-home"></i>
-        Inicio
-      </a>
-    </li>
-    <li>
-      <a href="/dashboard/info_personal">
-        <i class="fas fa-user"></i>
-        Mi info. personal</a>
-    </li>
-    <li>
-      <a href="#subMenuCalendario" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-calendar-alt"></i>
-        Mi calendario
-      </a>
-      <ul class="collapse list-unstyled" id="subMenuCalendario">
-        <li>
-          <a href="#">Fichajes</a>
-        </li>
-        <li>
-          <a href="#">Solicitud ausencia</a>
-        </li>
-        <li>
-          <a href="#">
-            Calendario laboral
-          </a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="/dashboard/nominas">
-        <i class="fas fa-copy"></i>
-        Mis nóminas</a>
-    </li>
-    <li>
-      <a href="/dashboard/mail">
-        <i class="fas fa-envelope"></i>
-        Mensajes</a>
-    </li>
-  </ul>
+        </ul>
+      </li>
 
-  {{#if user.IsRRHH}}
-  <ul class="list-unstyled components">
-    <li>
-      <a href="#subMenuRRHH" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-        <i class="fas fa-key"></i>
-        Administración RRHH
-      </a>
-      <ul class="collapse list-unstyled" id="subMenuRRHH">
-        <li>
-          <a href="/rrhh/nuevo_empleado"><i class="fas fa-plus-circle"></i>
-          Nuevo empleado</a>
-        </li>
-        <li>
-          <a href="/rrhh/gestionar_empleados"><i class="fas fa-tasks"></i>
-          Gestión empleados</a>
-        </li>
-        <li>
-          <a href="/rrhh/tablon_sugerencias"><i class="fas fa-inbox"></i>
-          Buzón de sugerencias</a>
-        </li>
-        <li>
-          <a href="/rrhh/solicitudes_cambio_info"><i class="fas fa-exchange-alt"></i>
-          Solicitudes info. personal</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  {{/if}}
+      <li><a href="#"><i class="fa fa-book"></i> <span>Ayuda</span></a></li>
 
-  <ul class="list-unstyled CTAs">
+      {{#if user.IsRRHH}}
+      <li class="header">RECURSOS HUMANOS</li>
+      <li>
+        <a href="/rrhh/gestionar_empleados">
+          <i class="fa fa-users" aria-hidden="true"></i> <span>Gestión empleados</span>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="/rrhh/tablon_sugerencias">
+          <i class="fa fa-inbox" aria-hidden="true"></i> <span>Buzón sugerencias</span>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="/rrhh/solicitudes_cambio_info">
+          <i class="fa fa-address-card" aria-hidden="true"></i> <span>Solicitudes rectificación</span>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li>
+      {{/if}}
 
-    <li>
-      <a href="/dashboard/sugerencias" class="article"><i class="fas fa-paper-plane"></i>Sugerencias</a>
-    </li>
-    <li>
-      <a href="/auth/logout" class="download"> <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-    </li>
-  </ul>
-  {{/if}}
-
-</nav>
+      <li class="header">LEYENDA</li>
+      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Importante</span></a></li>
+      <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Aviso</span></a></li>
+      <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Informativo</span></a></li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>
+{{/if}}

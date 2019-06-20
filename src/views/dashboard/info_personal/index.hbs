@@ -1,98 +1,94 @@
-<main class="my-form">
-	<div class="cotainer">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">
-						<div class="text-center py-2">
-							<h4><i class="fas fa-user"></i> Datos personales</h4>
-						</div>
-					</div>
-					<div class="card-body">
-						<form name="my-form" onsubmit="return validform()" action="success.php" method="">
-							<div class="form-group row">
-								<label for="full_name" class="col-md-4 col-form-label text-md-right"><abbr
-										title="Número de cuenta bancaria">IBAN</abbr></label>
-								<div class="col-md-6">
-									<input type="text" id="iban" value="{{user_info.IBAN}}" class="form-control" name="iban">
-								</div>
-							</div>
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+<div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Mis datos personales</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+              <div class="box-body">
 
-							<div class="form-group row">
-								<label for="email_address" class="col-md-4 col-form-label text-md-right">País</label>
-								<div class="col-md-6">
-									<input type="text" id="country" value="{{user_info.Country}}" class="form-control" name="country">
-								</div>
-							</div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">IBAN</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="iban" value="{{user_info.IBAN}}" name="iban" placeholder="IBAN">
+                  </div>
+                </div>
 
-							<div class="form-group row">
-								<label for="user_name" class="col-md-4 col-form-label text-md-right">Región</label>
-								<div class="col-md-6">
-									<input type="text" id="region" value="{{user_info.Region}}" class="form-control" name="region">
-								</div>
-							</div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">País</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="country" value="{{user_info.Country}}" name="country" placeholder="País">
+                  </div>
+                </div>
 
-							<div class="form-group row">
-								<label for="phone_number" class="col-md-4 col-form-label text-md-right">Código postal</label>
-								<div class="col-md-6">
-									<input type="text" id="zip" value="{{user_info.Zip}}" name="zip" class="form-control">
-								</div>
-							</div>
 
-							<div class="form-group row">
-								<label for="present_address" class="col-md-4 col-form-label text-md-right">Ciudad</label>
-								<div class="col-md-6">
-									<input type="text" id="city" name="city" value="{{user_info.City}}" class="form-control">
-								</div>
-							</div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Región</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="region" value="{{user_info.Region}}" name="region" placeholder="Región">
+                  </div>
+                </div>
+				
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Código postal</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="zip" value="{{user_info.Zip}}" name="zip" placeholder="Código postal">
+                  </div>
+                </div>
+				
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Población</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="city" value="{{user_info.City}}" name="city" placeholder="Población">
+                  </div>
+                </div>
+				
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Portal</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gate" value="{{user_info.Gate}}" name="gate" placeholder="Portal">
+                  </div>
+                </div>
+				
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Puerta</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="door" value="{{user_info.Door}}" name="door" placeholder="Puerta">
+                  </div>
+                </div>
 
-							<div class="form-group row">
-								<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Vía</label>
-								<div class="col-md-6">
-									<input type="text" id="street" class="form-control" value="{{user_info.Street}}" name="street">
-								</div>
-							</div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Teléfono móvil</label>
+                  <div class="col-sm-10">
+                    <input type="phone" class="form-control" id="phone" value="{{user_info.Phone}}" name="phone" placeholder="Teléfono móvil">
+                  </div>
+                </div>
 
-							<div class="form-group row">
-								<label for="nid_number" class="col-md-4 col-form-label text-md-right"><abbr
-										title="Número del portal">Portal</abbr></label>
-								<div class="col-md-6">
-									<input type="text" id="gate" value="{{user_info.Gate}}" class="form-control" name="gate">
-								</div>
-							</div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Teléfono fijo</label>
+                  <div class="col-sm-10">
+                    <input type="phone" class="form-control" id="phone2" value="{{user_info.Phone2}}" name="phone2" placeholder="Teléfono fijo">
+                  </div>
+                </div>
 
-							<div class="form-group row">
-								<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Puerta</label>
-								<div class="col-md-6">
-									<input type="text" id="door" value="{{user_info.Door}}" class="form-control" name="door">
-								</div>
-							</div>
 
-							<div class="form-group row">
-								<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Tfno. móvil</label>
-								<div class="col-md-6">
-									<input type="text" id="phone" value="{{user_info.Phone}}" class="form-control" name="phone">
-								</div>
-							</div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" class="btn btn-info pull-right">Solicitar rectificación</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          <!-- /.box -->
 
-							<div class="form-group row">
-								<label for="permanent_address" class="col-md-4 col-form-label text-md-right">Tfno. fijo</label>
-								<div class="col-md-6">
-									<input type="text" id="phone2" value="{{user_info.Phone2}}" class="form-control" name="phone2">
-								</div>
-							</div>
+          
 
-							<div class="col-md-6 offset-md-4">
-								<button type="submit" class="btn btn-primary">
-									Solicitar cambio
-								</button>
-							</div>
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-
-</main>
+          <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+      </div>
