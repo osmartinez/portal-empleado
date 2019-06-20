@@ -21,7 +21,7 @@ helpers.isLoggedIn = (req, res, next) => {
 }
 
 helpers.checkFirstLogin = (req, res, next)=>{
-    if(req.user.first_login){
+    if(req.user.IsFirstLogin){
         res.redirect('/dashboard/cambiar_clave')
     }
     else{
@@ -30,7 +30,7 @@ helpers.checkFirstLogin = (req, res, next)=>{
 }
 
 helpers.notCheckFirstLogin = (req, res, next)=>{
-    if(!req.user.first_login){
+    if(!req.user.IsFirstLogin){
         res.redirect('/dashboard')
     }
     else{

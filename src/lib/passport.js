@@ -9,11 +9,10 @@ passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true,
-}, async(req,username,password, done)=>{
+}, (req,username,password, done)=>{
     params = []
     db.buildParams(params,"Username", TYPES.NVarChar, username)
-    await db.procedure("FindUserByUsername",params,(rows)=>{
-        console.log(rows)
+    db.procedure("FindUserByUsername",params,(rows)=>{
         if(rows.length==1 && rows[0].Status == user_status.ACTIVE){
             const user = rows[0]
             const comparisonResult = true
@@ -36,10 +35,10 @@ passport.serializeUser((user, done)=>{
     done(null, user.Id)
 })
 
-passport.deserializeUser(async (id, done)=>{
+passport.deserializeUser((id, done)=>{
     params = []
     db.buildParams(params,"Id", TYPES.Int, id)
-    await db.procedure("FindUserById", params, (rows)=>{
+    db.procedure("FindUserById", params, (rows)=>{
         done(null, rows[0])
     })
 })
