@@ -20,6 +20,31 @@ router.get('/calendario',isLoggedIn,checkFirstLogin,(req,res)=>{
 router.get('/mail',isLoggedIn,checkFirstLogin,(req,res)=>{
     res.render('dashboard/mail/index',{title: 'Mensajería'})
 })
+
+router.post("/mail/findUsersLikeName", isLoggedIn,checkFirstLogin,(req,res)=>{
+    const { name } = req.body
+    params = []
+    db.buildParams(params, 'Name',TYPES.NVarChar, name)
+    db.procedure('FindUsersLikeName',params, (results)=>{
+        console.log(results)
+        res.send(results)
+    })
+})
+
+router.post("/mail/findNotExistingUsers", isLoggedIn,checkFirstLogin,(req,res)=>{
+    let {users } = req.body
+    users = JSON.parse(users)
+    let users_str = ''
+    users.forEach(user=>{
+        users_str += user+","
+    })
+    users_str = users_str.substr(0,users_str.length-1)
+    params = []
+    db.buildParams(params, 'Users', TYPES.NVarChar, users_str)
+    db.procedure('FindNotExistingUsers',params, (results)=>{
+        res.send(results)
+    })
+})
 // fin rutas mail
 
 // Rutas cambiar clave
