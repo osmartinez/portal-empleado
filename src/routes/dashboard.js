@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path')
 const db = require('../db')
 const TYPES = require('tedious').TYPES
+const {stringifyUsers} = require('../lib/globalHelpers')
 
 router.get('/',isLoggedIn,checkFirstLogin,(req,res)=>{
     res.render('dashboard/index',{title: 'Portal web'})
@@ -18,7 +19,23 @@ router.get('/calendario',isLoggedIn,checkFirstLogin,(req,res)=>{
 
 // rutas mail
 router.get('/mail',isLoggedIn,checkFirstLogin,(req,res)=>{
-    res.render('dashboard/mail/index',{title: 'Mensajería'})
+    res.redirect('/dashboard/mail/inbox')
+})
+
+router.get('/mail/inbox',isLoggedIn,checkFirstLogin,(req,res)=>{
+    params = []
+    db.buildParams(params, 'Id', TYPES.Int, req.user.Id)
+    db.procedure('FindReceivedMailsByUserId',params,(result)=>{
+        res.render('dashboard/mail/inbox',{title: 'Mensajes', recibidos: result})
+    })
+})
+
+router.get('/mail/enviados',isLoggedIn,checkFirstLogin,(req,res)=>{
+    params = []
+    db.buildParams(params, 'Id', TYPES.Int, req.user.Id)
+    db.procedure('FindSentMailsByUserId',params,(result)=>{
+        res.render('dashboard/mail/enviados',{title: 'Mensajes', enviados: result})
+    })
 })
 
 router.post("/mail/findUsersLikeName", isLoggedIn,checkFirstLogin,(req,res)=>{
@@ -33,16 +50,24 @@ router.post("/mail/findUsersLikeName", isLoggedIn,checkFirstLogin,(req,res)=>{
 
 router.post("/mail/findNotExistingUsers", isLoggedIn,checkFirstLogin,(req,res)=>{
     let {users } = req.body
-    users = JSON.parse(users)
-    let users_str = ''
-    users.forEach(user=>{
-        users_str += user+","
-    })
-    users_str = users_str.substr(0,users_str.length-1)
+    users = stringifyUsers(JSON.parse(users))
     params = []
-    db.buildParams(params, 'Users', TYPES.NVarChar, users_str)
+    db.buildParams(params, 'Users', TYPES.NVarChar, users)
     db.procedure('FindNotExistingUsers',params, (results)=>{
         res.send(results)
+    })
+})
+
+router.post("/mail/sendMail",isLoggedIn,checkFirstLogin,(req,res)=>{
+    let {subject, body, users} = req.body
+    users = stringifyUsers(JSON.parse(users))
+    params = []
+    db.buildParams(params,'Users', TYPES.NVarChar, users)
+    db.buildParams(params, 'From', TYPES.Int, req.user.Id)
+    db.buildParams(params, 'Subject',TYPES.NVarChar, subject)
+    db.buildParams(params, 'Body', TYPES.NVarChar, body)
+    db.procedure('SendMail',params, (results)=>{
+        res.send(true)
     })
 })
 // fin rutas mail
