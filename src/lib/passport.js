@@ -9,13 +9,13 @@ passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true,
-}, (req,username,password, done)=>{
+},  (req,username,password, done)=>{
     params = []
     db.buildParams(params,"Username", TYPES.NVarChar, username)
-    db.procedure("FindUserByUsername",params,(rows)=>{
+    db.procedure("FindUserByUsername",params, async (rows)=>{
         if(rows.length==1 && rows[0].Status == user_status.ACTIVE){
             const user = rows[0]
-            const comparisonResult = true
+            const comparisonResult = await authHelpers.comparePwd(password,user.Password)
             if(comparisonResult){
                 done(null, user, req.flash('success','Bienvenido '+user.Name))
             }
