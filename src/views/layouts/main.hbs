@@ -79,7 +79,10 @@
     $.widget.bridge('uibutton', $.ui.button);
     {{#if user.IsRRHH}}
       document.cookie = "is_rrhh=true"
+      {{else}}
+      document.cookie = "is_rrhh=false"
     {{/if}}
+          alert(document.cookie)
   </script>
   <!-- Bootstrap 3.3.7 -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
