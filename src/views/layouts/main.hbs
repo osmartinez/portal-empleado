@@ -77,6 +77,9 @@
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button);
+    {{#if user.IsRRHH}}
+      document.cookie = "is_rrhh=true"
+    {{/if}}
   </script>
   <!-- Bootstrap 3.3.7 -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
