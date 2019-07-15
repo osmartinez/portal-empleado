@@ -28,7 +28,7 @@ describe('Probando permisos visitante', function (done) {
 describe('Probando permisos de usuario normal', function (done) {
     it('Debería cargar el dashboard sin problema', (done) => {
         authenticatedNormalUser.get('/dashboard')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería redireccionar a la página de dashboard al intentar cargar RRHH', (done) => {
@@ -40,7 +40,7 @@ describe('Probando permisos de usuario normal', function (done) {
 
     it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
         authenticatedNormalUser.get('/auth/login')
-            .expect(302, done);
+            .expect(200, done);
     });
 
     it('Debería desloggear y redireccionar a la página de acceso', (done) => {
