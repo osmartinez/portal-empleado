@@ -36,7 +36,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
             console.log(req.body)
             var data = querystring.stringify(req.body);
             var options = {
-                host: '10.0.0.4',
+                host: '40.68.185.174',
                 port: 4000,
                 path: "/auth/login",
                 method: "POST",
@@ -52,7 +52,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
                     console.log("body " + chunk)
                 })
                 response.on('end', () => {
-                    res.redirect('10.0.0.4:4000/auth/login')
+                    res.redirect('http://40.68.185.174:4000/auth/login')
                 })
             })
             httpreq.write(data)
