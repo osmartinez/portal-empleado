@@ -18,7 +18,7 @@ docker exec -it app npm run test:e2e'''
         }
         stage('Automation test') {
           steps {
-            sh '''docker network rm portalempleadogreen_default --force
+            sh '''docker network rm portalempleadogreen_default
 docker-compose up --build
 docker exec -it app npm run test:e2e'''
           }
