@@ -1,22 +1,22 @@
-version: "2"        // which version of compose syntax you are using
+version: "2"
 services:
   app:
-    container_name: app  // explicit so we can use this for app:3000
+    container_name: app  
     build:
       context: .
-      dockerfile: Dockerfile.e2e            // a self defined Dockerfile, see below
-    ports:               // exposes port 3000 (where express runs)
-      - "4000:4000"         to other containers, and to our local       
-    depends_on:             browser
+      dockerfile: Dockerfile.e2e
+    ports:
+      - "4000:4000"   
+    depends_on:
       - firefox-container
-    volumes:             // maps so changes to these can be seen
+    volumes:
       - ./e2eTests:/e2eTests
       - ./package.json:/package.json
       - ./package-lock.json:/package-lock.json
       - ./.gitignore:/.gitignore
       - ./index.js:/index.js
 
-  firefox-container:      // we'll look at this below
+  firefox-container:
     container_name: firefox-container
     image: selenium/standalone-firefox:3.12.0-americium
     volumes:
