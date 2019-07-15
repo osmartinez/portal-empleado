@@ -9,11 +9,19 @@ echo "Build step finished"'''
       }
     }
     stage('Unit test') {
-      steps {
-        sh '''docker build -t portal-empleado-test -f Dockerfile.test .
-docker run --rm portal-empleado-test
-
-'''
+      parallel {
+        stage('Unit test') {
+          steps {
+            sh '''docker-compose up --build
+docker exec -it app npm run test:e2e'''
+          }
+        }
+        stage('Automation test') {
+          steps {
+            sh '''docker-compose up --build
+docker exec -it app npm run test:e2e'''
+          }
+        }
       }
     }
     stage('Run') {
