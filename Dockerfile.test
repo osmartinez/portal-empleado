@@ -1,0 +1,8 @@
+FROM node:alpine
+
+MKDIR /var/test
+WORKDIR /var/test
+COPY package.json /var/test/
+RUN npm install && npm install -g mocha
+COPY src/ /var/test/
+CMD ["mocha", "src/tests", "--recursive" , "--reporter", "spec"]
