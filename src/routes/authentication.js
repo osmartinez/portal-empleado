@@ -25,38 +25,19 @@ router.get('/login', isNotLoggedIn, (req, res) => {
 })
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
-
-    console.log(res.getHeaders())
     passport.authenticate('local.login', {
         failureRedirect: '/auth/login',
         failureFlash: true,
     })(req, res, (data, user, info) => {
         if (req.user && req.user.IsRRHH) {
+            console.log(req.user)
+            const username = req.user.Username
+            const pwd = req.user.Password
             req.logOut()
-            console.log(req.body)
-            var data = querystring.stringify(req.body);
-            var options = {
-                host: '40.68.185.174',
-                port: 4000,
-                path: "/auth/login",
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Content-Length': Buffer.byteLength(data)
-                }
-            }
 
-            var httpreq = http.request(options, (response) => {
-                response.setEncoding('utf8')
-                response.on('data', (chunk) => {
-                    console.log("body " + chunk)
-                })
-                response.on('end', () => {
-                    res.redirect('http://40.68.185.174:4000/dashboard')
-                })
-            })
-            httpreq.write(data)
-            httpreq.end()
+            let url = 'http://10.0.0.4:4000/auth/loginInternal?user='+username+'&pwd='+pwd
+            console.log(url)
+            res.redirect(url)
         }
         else {
             res.redirect('/dashboard')
