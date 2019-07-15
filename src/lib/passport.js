@@ -31,7 +31,7 @@ passport.use('local.login', new LocalStrategy({
                     console.log(req.body)
                     var data = querystring.stringify(req.body);
                     var options = {
-                        host: await getMyIPAddress(),
+                        host: '10.0.0.4',
                         port: 4000,
                         path: "/auth/login",
                         method: "POST",
