@@ -5,5 +5,7 @@ WORKDIR /var/test
 COPY package.json /var/test/
 RUN npm install && npm install -g mocha
 COPY src/ /var/test/
-CMD ["ls -a"]
+CMD ["echo", "$(pwd)"]
+CMD ["echo", "$(ls)"]
+
 CMD ["mocha", "/var/test/src/tests", "--recursive" , "--reporter", "spec"]
