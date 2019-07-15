@@ -10,7 +10,7 @@ echo "Build step finished"'''
     }
     stage('Unit test') {
       steps {
-        sh 'docker run --name portal-empleado -p 1337:1337 portal-empleado:$BUILD_NUMBER npm test &'
+        sh 'docker run --name portal-empleado -p 1337:1337 portal-empleado:$BUILD_NUMBER node /var/www/index.js &'
       }
     }
     stage('End') {
