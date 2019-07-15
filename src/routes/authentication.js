@@ -15,11 +15,25 @@ router.get('/login',isNotLoggedIn,(req,res)=>{
     res.render('authentication/login',{title: 'Acceso'})
 })
 
-router.post('/login',isNotLoggedIn, (req,res,next)=>{
-    console.log(res.getHeaders())
+router.get('/loginInternal',isNotLoggedIn,(req,res,next)=>{
+    req.body.username = req.query.user
+    req.body.password= req.query.pwd
+
+    console.log(req.body)
+
     passport.authenticate('local.login',{
-        successRedirect: '/dashboard',
         failureRedirect: '/auth/login',
+        successRedirect: '/dashboard',
+        failureFlash: true,
+    })(req,res,next)
+})
+
+
+router.post('/login',isNotLoggedIn, (req,res,next)=>{
+    console.log(req.body)
+    passport.authenticate('local.login',{
+        failureRedirect: '/auth/login',
+        successRedirect: '/dashboard',
         failureFlash: true,
     })(req,res,next)
 })
