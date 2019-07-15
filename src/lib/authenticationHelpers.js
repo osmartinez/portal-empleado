@@ -12,6 +12,7 @@ helpers.comparePwd = async (pwd, savedHash) => {
 }
 
 helpers.isLoggedIn = (req, res, next) => {
+    res.cookie("is_rrhh",(req.user!=null && req.user.IsRRHH)? true: false)
     if (req.isAuthenticated() ) {
         return next()
     }
@@ -40,6 +41,7 @@ helpers.notCheckFirstLogin = (req, res, next)=>{
 
 
 helpers.isNotLoggedIn = (req, res, next) => {
+    res.cookie("is_rrhh",(req.user!=null && req.user.IsRRHH)? true: false)
     if (req.isAuthenticated() && req.path != '/logout') {
         return res.redirect('/dashboard')
     }

@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const validator = require('express-validator');
 const passport = require('passport')
 const helmet = require('helmet')
-
+const cookieParser = require('cookie-parser')
 // inicializar
 const app = express()
 require('./lib/passport')
@@ -31,6 +31,7 @@ app.use(helmet())
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 const expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
 

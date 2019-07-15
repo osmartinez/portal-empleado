@@ -77,20 +77,7 @@
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
     $.widget.bridge('uibutton', $.ui.button);
-    function removeCookie(cookie) {
-            var res = document.cookie;
-            var multiple = res.split(";");
-            for(var i = 0; i < multiple.length; i++) {
-               var key = multiple[i].split("=");
-               if(key[0]!=cookie) continue
-               document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
-            }
-         }
 
-      removeCookie("is_rrhh")
-    {{#if user.IsRRHH}}
-      document.cookie = "is_rrhh=true"
-    {{/if}}
   </script>
   <!-- Bootstrap 3.3.7 -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -100,11 +87,11 @@
   <script src="/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
   <script src="/bower_components/fullcalendar/dist/locale/es.js"></script>
   <script>
-    $(function () {
-      $('#calendar').fullCalendar({
-        locale: 'es'
+      $(function () {
+        $('#calendar').fullCalendar({
+          locale: 'es'
+        });
       });
-    });
   </script>
   <!-- Page specific script -->
   <!-- Sparkline -->
