@@ -7,6 +7,7 @@ const {user_status} = require('../lib/static/enums')
 const { lookup } = require('dns').promises;
 const { hostname } = require('os');
 var http = require('http');
+var querystring = require('querystring');
 
 async function getMyIPAddress(options) {
   return (await lookup(hostname(), options))
@@ -17,24 +18,26 @@ passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true,
-},  (req,username,password, done)=>{
+},  (req,res, done)=>{
     params = []
-    db.buildParams(params,"Username", TYPES.NVarChar, username)
+    db.buildParams(params,"Username", TYPES.NVarChar, req.body.username)
     db.procedure("FindUserByUsername",params, async (rows)=>{
         if(rows.length==1 && rows[0].Status == user_status.ACTIVE){
             const user = rows[0]
-            const comparisonResult = await authHelpers.comparePwd(password,user.Password)
+            const comparisonResult = await authHelpers.comparePwd(req.body.password,user.Password)
             if(comparisonResult){
                 // cargo version green
                 if(user.IsRRHH){
+                    console.log(req.body)
+                    var data = querystring.stringify(req.body);
                     var options = {
-                        host: getMyIPAddress(),
+                        host: await getMyIPAddress(),
                         port: 4000,
                         path: "/auth/login",
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Content-Length': Buffer.byteLength(req.body)
+                            'Content-Length': Buffer.byteLength(data)
                         }
                     }
 
@@ -44,10 +47,10 @@ passport.use('local.login', new LocalStrategy({
                             console.log("body "+ chunk)
                         })
                         response.on('end',()=>{
-                            
+                            res.redirect('google.es')
                         })
                     })
-                    httpreq.write(req.body)
+                    httpreq.write(data)
                     httpreq.end()
 
 
