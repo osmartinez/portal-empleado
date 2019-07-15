@@ -58,17 +58,16 @@ describe('Probando permisos de usuario normal', function (done) {
 describe('Probando permisos de usuario RRHH', function (done) {
     it('Debería cargar el dashboard', (done) => {
         authenticatedRRHHUser.get('/dashboard')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería cargar la página de RRHH', (done) => {
         authenticatedRRHHUser.get('/rrhh')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
         authenticatedRRHHUser.get('/auth/login')
-            .expect('Location', '/dashboard')
             .expect(302, done);
     });
 
