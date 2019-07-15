@@ -18,7 +18,7 @@ docker run --rm portal-empleado-test
     }
     stage('Run') {
       steps {
-        sh '''docker run --name portal-empleado-green -p 4000:4000 portal-empleado-green:$BUILD_NUMBER node /var/www/green/index.js &
+        sh '''docker run --name portal-empleado-green -p 4000:4000 portal-empleado-green:$BUILD_NUMBER node /var/www/index.js &
 '''
         echo 'RUNNING'
       }
