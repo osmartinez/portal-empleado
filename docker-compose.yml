@@ -14,7 +14,7 @@ services:
       - ./package.json:/package.json
       - ./package-lock.json:/package-lock.json
       - ./.gitignore:/.gitignore
-      - ./index.js:/index.js
+      - ./src/index.js:/src/index.js
 
   firefox-container:
     container_name: firefox-container
