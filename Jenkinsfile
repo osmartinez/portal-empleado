@@ -4,7 +4,8 @@ pipeline {
     stage('Build') {
       steps {
         sh '''docker build --tag portal-empleado:$BUILD_NUMBER .
-docker stop portal-empleado'''
+docker stop portal-empleado && docker rm portal-empleado
+echo "Build step finished"'''
       }
     }
     stage('Unit test') {
