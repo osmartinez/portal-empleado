@@ -1,5 +1,5 @@
 FROM node:carbon 
 WORKDIR ./ 
-COPY ./package.json ./package-lock.json ./index.js ./ 
+COPY ./package.json ./package-lock.json ./src/index.js ./ ./src
 RUN npm install 
 CMD [ "npm", "start" ]
