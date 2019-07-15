@@ -1,3 +1,4 @@
+https://blog.teemo.co/things-i-learned-using-docker-compose-with-jenkins-8acd669af94a
 version: "2"
 services:
   app:
