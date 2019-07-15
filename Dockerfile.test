@@ -1,6 +1,6 @@
 FROM node:alpine
 
-MKDIR /var/test
+RUN mkdir /var/test
 WORKDIR /var/test
 COPY package.json /var/test/
 RUN npm install && npm install -g mocha
