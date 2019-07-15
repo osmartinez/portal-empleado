@@ -92,7 +92,7 @@ describe('Probando permisos de usuario first-time-login', function (done) {
 
     it('Debería cargar la página de cambio de clave si intento acceder a recursos humanos', (done) => {
         authenticatedFirstLoginUser.get('/rrhh')
-            .expect('Location', '/dashboard/cambiar_clave')
+            .expect('Location', '/dashboard')
             .expect(302, done);
     });
 
