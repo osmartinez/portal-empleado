@@ -4,6 +4,14 @@ const db = require('../db')
 const authHelpers = require('../lib/authenticationHelpers')
 const TYPES = require("tedious").TYPES;
 const {user_status} = require('../lib/static/enums')
+const { lookup } = require('dns').promises;
+const { hostname } = require('os');
+var http = require('http');
+
+async function getMyIPAddress(options) {
+  return (await lookup(hostname(), options))
+    .address;
+}
 
 passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
@@ -17,7 +25,36 @@ passport.use('local.login', new LocalStrategy({
             const user = rows[0]
             const comparisonResult = await authHelpers.comparePwd(password,user.Password)
             if(comparisonResult){
-                done(null, user, req.flash('success','Bienvenido '+user.Name))
+                // cargo version green
+                if(user.IsRRHH){
+                    var options = {
+                        host: getMyIPAddress(),
+                        port: 4000,
+                        path: "/auth/login",
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Content-Length': Buffer.byteLength(req.body)
+                        }
+                    }
+
+                    var httpreq = http.request(options, (response)=>{
+                        response.setEncoding('utf8')
+                        response.on('data',(chunk)=>{
+                            console.log("body "+ chunk)
+                        })
+                        response.on('end',()=>{
+                            
+                        })
+                    })
+                    httpreq.write(req.body)
+                    httpreq.end()
+
+
+                }
+                else{
+                    done(null, user, req.flash('success','Bienvenido '+user.Name))
+                }
             }
             else{
                 done(null, false , req.flash('message','Contraseña incorrecta'))
