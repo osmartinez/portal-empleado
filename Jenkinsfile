@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh '''docker build --tag portal-empleado:$BUILD_NUMBER .
-docker stop portal-empleado && docker rm portal-empleado
+        sh '''docker build --tag portal-empleado-blue:$BUILD_NUMBER .
+docker stop portal-empleado-blue && docker rm portal-empleado-blue
 echo "Build step finished"'''
       }
     }
@@ -18,7 +18,7 @@ docker run --rm portal-empleado-test
     }
     stage('Run') {
       steps {
-        sh '''docker run --name portal-empleado -p 3000:3000 portal-empleado:$BUILD_NUMBER node /var/www/index.js &
+        sh '''docker run --name portal-empleado-blue -p 3000:3000 portal-empleado:$BUILD_NUMBER node /var/www/blue/index.js &
 '''
         echo 'RUNNING'
       }
