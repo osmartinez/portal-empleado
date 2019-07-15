@@ -2,9 +2,8 @@ FROM node:alpine
 
 EXPOSE 3000
 
-RUN mkdir -p /var/www/blue
-WORKDIR /var/www/blue/
-COPY package.json /var/www/blue/
-COPY haproxy.cfg /var/www/blue/
+WORKDIR /var/www/
+COPY package.json /var/www/
+COPY haproxy.cfg /var/www/
 RUN npm install
-COPY src/ /var/www/blue/
+COPY src/ /var/www/
