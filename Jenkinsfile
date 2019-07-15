@@ -19,8 +19,7 @@ docker exec -it app npm run test:e2e'''
         stage('Automation test') {
           steps {
             sh '''docker-compose up -d --build &
-docker wait portalempleadogreen_app
-docker run portalempleadogreen_app npm run test:e2e'''
+docker exec app npm run test:e2e'''
           }
         }
       }
