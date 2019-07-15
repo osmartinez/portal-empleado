@@ -41,7 +41,7 @@ helpers.notCheckFirstLogin = (req, res, next)=>{
 
 
 helpers.isNotLoggedIn = (req, res, next) => {
-    res.cookie("is_rrhh",(req.user!=null && req.user.IsRRHH)? true: false)
+    res.clearCookie("is_rrhh")
     if (req.isAuthenticated() && req.path != '/logout') {
         return res.redirect('/dashboard')
     }
