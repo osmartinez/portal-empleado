@@ -52,7 +52,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
                     console.log("body " + chunk)
                 })
                 response.on('end', () => {
-                    res.redirect('http://40.68.185.174:4000/auth/login')
+                    res.redirect('http://40.68.185.174:4000/dashboard')
                 })
             })
             httpreq.write(data)
