@@ -66,9 +66,9 @@ describe('Probando permisos de usuario RRHH', function (done) {
             .expect(302, done);
     });
 
-    it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
+    it('Debería dejar acceder normalmente porque cambia a green', (done) => {
         authenticatedRRHHUser.get('/auth/login')
-            .expect(302, done);
+            .expect(200, done);
     });
 
     it('Debería deslogear y redireccionar a la página de acceso', (done) => {
