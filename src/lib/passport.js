@@ -18,13 +18,13 @@ passport.use('local.login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true,
-},  (req,res, done)=>{
+},  (req,username,password, done)=>{
     params = []
-    db.buildParams(params,"Username", TYPES.NVarChar, req.body.username)
+    db.buildParams(params,"Username", TYPES.NVarChar, username)
     db.procedure("FindUserByUsername",params, async (rows)=>{
         if(rows.length==1 && rows[0].Status == user_status.ACTIVE){
             const user = rows[0]
-            const comparisonResult = await authHelpers.comparePwd(req.body.password,user.Password)
+            const comparisonResult = await authHelpers.comparePwd(password,user.Password)
             if(comparisonResult){
                 // cargo version green
                 if(user.IsRRHH){
