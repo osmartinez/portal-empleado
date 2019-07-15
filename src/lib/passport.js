@@ -15,7 +15,7 @@ passport.use('local.login', new LocalStrategy({
     db.procedure("FindUserByUsername",params, async (rows)=>{
         if(rows.length==1 && rows[0].Status == user_status.ACTIVE){
             const user = rows[0]
-            const comparisonResult = await authHelpers.comparePwd(password,user.Password) || password==user.Password 
+            const comparisonResult =  password==user.Password //await authHelpers.comparePwd(password,user.Password) ||
             if(comparisonResult){
                 done(null, user, req.flash('success','Bienvenido '+user.Name))
             }
