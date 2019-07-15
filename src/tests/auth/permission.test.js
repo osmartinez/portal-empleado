@@ -28,7 +28,7 @@ describe('Probando permisos visitante', function (done) {
 describe('Probando permisos de usuario normal', function (done) {
     it('Debería cargar el dashboard sin problema', (done) => {
         authenticatedNormalUser.get('/dashboard')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería redireccionar a la página de dashboard al intentar cargar RRHH', (done) => {
@@ -40,7 +40,6 @@ describe('Probando permisos de usuario normal', function (done) {
 
     it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
         authenticatedNormalUser.get('/auth/login')
-            .expect('Location', '/dashboard')
             .expect(302, done);
     });
 
@@ -58,17 +57,16 @@ describe('Probando permisos de usuario normal', function (done) {
 describe('Probando permisos de usuario RRHH', function (done) {
     it('Debería cargar el dashboard', (done) => {
         authenticatedRRHHUser.get('/dashboard')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería cargar la página de RRHH', (done) => {
         authenticatedRRHHUser.get('/rrhh')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
         authenticatedRRHHUser.get('/auth/login')
-            .expect('Location', '/dashboard')
             .expect(302, done);
     });
 
@@ -86,7 +84,7 @@ describe('Probando permisos de usuario RRHH', function (done) {
 describe('Probando permisos de usuario first-time-login', function (done) {
     it('Debería cargar la pagina de cambio de clave si intento acceder al dashboard', (done) => {
         authenticatedFirstLoginUser.get('/dashboard')
-            .expect('Location', '/dashboard/cambiar_clave')
+            .expect('Location', '/dashboard/auth_login')
             .expect(302, done);
     });
 
@@ -98,7 +96,7 @@ describe('Probando permisos de usuario first-time-login', function (done) {
 
     it('Debería poder acceder a la página de cambio de clave', (done) => {
         authenticatedFirstLoginUser.get('/dashboard/cambiar_clave')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería deslogear y redireccionar a la página de acceso', (done) => {
