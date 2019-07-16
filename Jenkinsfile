@@ -18,8 +18,7 @@ docker run --rm portal-empleado-test'''
         }
         stage('Automation test') {
           steps {
-            sh '''docker network rm mynet
-docker network create mynet
+            sh '''docker network create mynet
 
 docker run -d --net mynet --name firefox-container my_image --rm
 
