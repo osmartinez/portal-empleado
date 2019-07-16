@@ -5,7 +5,7 @@ pipeline {
       steps {
         sh '''docker stop portal-empleado && docker rm portal-empleado
 docker build -t portal-empleado -f Dockerfile .
-docker run --name portal-empleado -p 4000:5555'''
+docker run --name portal-empleado -p 4000:5555 portal-empleado'''
       }
     }
     stage('Test') {
