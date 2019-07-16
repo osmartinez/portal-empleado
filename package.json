@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node index.js",
-    "test:e2e": "codeceptjs run --steps --verbose --config=./e2eTests/config.test.js",
+    "test:e2e": "codeceptjs run --steps --verbose --config=./src/tests/e2eTests/config.test.js",
     "test": "mocha ./src/tests --recursive --reporter mochawesome --reporter-options autoOpen=true",
     "dev": "nodemon src/"
   },
