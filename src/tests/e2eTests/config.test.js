@@ -1,5 +1,5 @@
 exports.config = {
-    tests: './*_test.js',    // how to know which files are test files
+    tests: './*.test.js',    // how to know which files are test files
     output: './output',      // where to save screenshots
     helpers: {
      WebDriverIO: {               // which backend helper to use
