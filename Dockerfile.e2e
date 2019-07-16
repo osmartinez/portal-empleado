@@ -2,4 +2,4 @@ FROM node:carbon
 WORKDIR ./ 
 COPY ./package.json ./package-lock.json ./src ./
 RUN npm install 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "test:e2e" ]
