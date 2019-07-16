@@ -2,4 +2,4 @@ FROM node:carbon
 WORKDIR ./ 
 COPY ./package.json ./package-lock.json ./src ./
 RUN npm install && npm install -g mocha && npm install -g codeceptjs
-CMD [ "codeceptjs", "run", "--steps", "--verbose", "--config=./src/tests/e2eTests/config.test.js" ]
+CMD [ "codeceptjs", "run", "--steps", "--verbose", "--config=./src/tests/e2eTests/config.js" ]
