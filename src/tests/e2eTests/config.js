@@ -1,6 +1,6 @@
 exports.config = {
     tests: './*.test.js',    // how to know which files are test files
-    output: './output',      // where to save screenshots
+    output: '',
     helpers: {
      WebDriverIO: {               // which backend helper to use
        url: 'http://app:4001',    // a base URL to start on
