@@ -38,5 +38,10 @@ docker run --name portal-empleado-green -p 4000:4000 portal-empleado-green:$BUIL
 '''
       }
     }
+    stage('Finish') {
+      steps {
+        echo 'Cambio publicado correctamente'
+      }
+    }
   }
 }
