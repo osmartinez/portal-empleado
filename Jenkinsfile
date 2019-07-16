@@ -22,7 +22,7 @@ docker run --rm portal-empleado-test'''
 docker run -d -p 4444:4444 --net mynet -v /dev/shm:/dev/shm --name firefox-container selenium/standalone-firefox:3.12.0-americium
 
 docker build -t portal-empleado-e2e-test -f Dockerfile.e2e .
-docker run --net mynet -p 4000:4000 -v e2eTests:/e2eTests -v package.json:/package.json -v package-lock.json:/package-lock.json -v .gitignore:/.gitignore -v src/index.js:/src/index.js --rm portal-empleado-e2e-test
+docker run --net mynet -p 4000:4000 -v e2eTests:/e2eTests -v package.json:/package.json -v src/index.js:/src/index.js --rm portal-empleado-e2e-test
 docker exec portal-empleado-e2e-test npm run test:e2e
 '''
           }
