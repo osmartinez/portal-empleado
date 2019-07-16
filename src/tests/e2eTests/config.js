@@ -3,7 +3,7 @@ exports.config = {
     output: '',
     helpers: {
      WebDriverIO: {               // which backend helper to use
-       url: 'http://app:4001',    // a base URL to start on
+       url: 'http://localhost:4001',    // a base URL to start on
        host: 'firefox-container', // identifying where selenium runs
        browser: 'firefox',        // a series of config options
        smartWait: 5000,              
