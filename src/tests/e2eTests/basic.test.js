@@ -1,6 +1,6 @@
 Feature('Basic test');
 
 Scenario('navigate to homepage', I => {
-  I.amOnPage('/');
-  I.see('Acceder');
+  I.amOnPage('https://google.es');
+  I.see('Buscar con Google');
 });
