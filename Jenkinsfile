@@ -21,6 +21,7 @@ docker run --rm portal-empleado-test'''
             sh '''docker network rm mynet
 docker network create mynet
 
+docker stop firefox-container && docker rm firefox-container
 docker run -d --net mynet -v /dev/shm:/dev/shm --name firefox-container selenium/standalone-firefox:3.12.0-americium --rm
 
 docker build -t portal-empleado-e2e-test -f Dockerfile.e2e .
