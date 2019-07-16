@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test:e2e": "codeceptjs run --config=./src/tests/e2eTests/config.js",
-    "test": "mocha ./src/tests/unitTests --recursive --reporter mochawesome --reporter-options autoOpen=true",
+    "test": "mocha ./src/tests/unitTests --recursive",
     "dev": "nodemon src/"
   },
   "keywords": [],

@@ -1,8 +1,8 @@
 const assert = require('assert');
 const expect = require('chai').expect
 const request = require('supertest');
-const app = require('../../index')
-const { authenticatedNormalUser, authenticatedRRHHUser } = require('../../tests/testHelpers/testHelper.test')
+const app = require('../../../index')
+const { authenticatedNormalUser, authenticatedRRHHUser } = require('../testHelpers/testHelper.test')
 
 /**
  * Probamos que un visitante sin logear no puede acceder ni al dashboard ni a RRHH
