@@ -12,14 +12,19 @@ echo "Build step finished"'''
       parallel {
         stage('Unit test') {
           steps {
-            sh '''docker-compose up --build
-docker exec -it app npm run test:e2e'''
+            sh '''docker build -t portal-empleado-test -f Dockerfile.test .
+docker run --rm portal-empleado-test'''
           }
         }
         stage('Automation test') {
           steps {
-            sh '''docker-compose up -d --build &
-docker exec app npm run test:e2e'''
+            sh '''docker stop firefox-container && docker rm firefox-container
+docker run -d -p 4444:4444 --net mynet -v /dev/shm:/dev/shm --name firefox-container selenium/standalone-firefox:3.12.0-americium
+
+docker build -t portal-empleado-e2e-test -f Dockerfile.e2e .
+docker run -d --net mynet -p 4000:4000 -v /$(pwd)/e2eTests:/e2eTests -v /$(pwd)/package.json:/package.json -v /$(pwd)/src/index.js:/src/index.js --rm portal-empleado-e2e-test
+docker exec portal-empleado-e2e-test npm run test:e2e
+'''
           }
         }
       }
