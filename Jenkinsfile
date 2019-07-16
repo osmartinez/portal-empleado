@@ -12,8 +12,8 @@ echo "Build step finished"'''
       parallel {
         stage('Unit test') {
           steps {
-            sh '''docker-compose up --build
-docker exec -it app npm run test:e2e'''
+            sh '''docker build -t portal-empleado-test -f Dockerfile.test .
+docker run --rm portal-empleado-test'''
           }
         }
         stage('Automation test') {
