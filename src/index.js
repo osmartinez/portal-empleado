@@ -9,7 +9,7 @@ const validator = require('express-validator');
 const passport = require('passport')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
-const {http_config} = require('./http_config')
+const http_config = require('./http_config')
 
 // inicializar
 const app = express()
