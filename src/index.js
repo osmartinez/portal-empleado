@@ -9,12 +9,14 @@ const validator = require('express-validator');
 const passport = require('passport')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
+const {http_config} = require('./http_config')
+
 // inicializar
 const app = express()
 require('./lib/passport')
 
 // configuracion
-app.set('port',process.argv[2]||5555)
+app.set('port',http_config.port || process.argv[2] || 4000)
 app.set('views',path.join(__dirname,'views'))
 app.engine('.hbs',exphbs({
     defaultLayout: 'main',

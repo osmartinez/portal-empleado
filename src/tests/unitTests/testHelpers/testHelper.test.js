@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
-const app = require('../../../index');
 const request = require('supertest');
+const {http_config} = require('./http_config')
+http_config.port = 5555
+const app = require('../../../index');
 
 const normalUserCredentials = {
     username: 'normal',
