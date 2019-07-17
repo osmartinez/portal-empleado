@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const request = require('supertest');
-const {http_config} = require('./http_config')
-http_config.port = 5555
+const {http_config} = require('../../../http_config')
+http_config.port = 6666
 const app = require('../../../index');
 
 const normalUserCredentials = {

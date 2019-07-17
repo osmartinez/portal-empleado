@@ -1,7 +1,5 @@
 FROM portal-empleado
 
-ARG PUERTO
-ENV PUERTO ${PUERTO}
 RUN mkdir /var/test
 WORKDIR /var/test
 COPY package.json /var/test/
