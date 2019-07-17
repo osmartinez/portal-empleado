@@ -10,8 +10,8 @@ docker run --net mynet --name portal-empleado -p 5555:5555 portal-empleado node 
     }
     stage('Test') {
       steps {
-        sh '''docker build -t portal-empleado-test -f Dockerfile.test .
-docker run --build-arg puerto=9999 --rm portal-empleado-test'''
+        sh '''docker build -t portal-empleado-test --build-arg puerto=9999 -f Dockerfile.test .
+docker run  --rm portal-empleado-test'''
       }
     }
     stage('Test E2E') {
