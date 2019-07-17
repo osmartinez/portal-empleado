@@ -1,4 +1,4 @@
-const {normalUserCredentials, rrhhUserCredentials, firstLoginUserCredentials} = require('../../credentials')
+const {normalUserCredentials, rrhhUserCredentials, firstLoginUserCredentials} = require('../credentials')
 
 Feature('LogIn usuario normal');
 
