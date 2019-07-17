@@ -2,40 +2,47 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const db = require('../db')
-const {isNotLoggedIn} = require('../lib/authenticationHelpers')
+const { isNotLoggedIn } = require('../lib/authenticationHelpers')
+const { lookup } = require('dns').promises;
+const { hostname } = require('os');
+var http = require('http');
+var querystring = require('querystring');
+
+async function getMyIPAddress(options) {
+    return (await lookup(hostname(), options))
+        .address;
+}
 
 
-router.get('/logout',isNotLoggedIn,(req,res)=>{
+router.get('/logout', isNotLoggedIn, (req, res) => {
     req.logOut()
     res.redirect('/auth/login')
 })
 
 
-router.get('/login',isNotLoggedIn,(req,res)=>{
-    res.render('authentication/login',{title: 'Acceso'})
+router.get('/login', isNotLoggedIn, (req, res) => {
+    res.render('authentication/login', { title: 'Acceso' })
 })
 
-router.get('/loginInternal',isNotLoggedIn,(req,res,next)=>{
-    req.body.username = req.query.user
-    req.body.password= req.query.pwd
-
-    console.log(req.body)
-
-    passport.authenticate('local.login',{
+router.post('/login', isNotLoggedIn, (req, res, next) => {
+    passport.authenticate('local.login', {
         failureRedirect: '/auth/login',
-        successRedirect: '/dashboard',
         failureFlash: true,
-    })(req,res,next)
-})
+    })(req, res, (data, user, info) => {
+        if (req.user && req.user.IsRRHH) {
+            console.log(req.user)
+            const username = req.user.Username
+            const pwd = req.user.Password
+            req.logOut()
 
-
-router.post('/login',isNotLoggedIn, (req,res,next)=>{
-    console.log(req.body)
-    passport.authenticate('local.login',{
-        failureRedirect: '/auth/login',
-        successRedirect: '/dashboard',
-        failureFlash: true,
-    })(req,res,next)
+            let url = 'http://40.68.185.174:4000/auth/loginInternal?user='+username+'&pwd='+pwd
+            console.log(url)
+            res.redirect(url)
+        }
+        else {
+            res.redirect('/dashboard')
+        }
+    })
 })
 
 module.exports = router
