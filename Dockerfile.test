@@ -7,5 +7,4 @@ WORKDIR /var/test
 COPY package.json /var/test/
 RUN npm install && npm install -g mocha
 COPY src/ /var/test/
-RUN echo "${PUERTO}"
-CMD mocha tests/unitTests/ ${PUERTO} --recursive && mocha --exit
+CMD mocha tests/unitTests/ --recursive && mocha --exit
