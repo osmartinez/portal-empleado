@@ -1,10 +1,12 @@
-Feature('Basic test');
+const {normalUserCredentials, rrhhUserCredentials, firstLoginUserCredentials} = require('../../credentials')
 
-Scenario('navigate to homepage', I => {
+Feature('LogIn usuario normal');
+
+Scenario('Navego a la pagina inicial', I => {
   I.amOnPage('/');
   I.see('Acceder');
-  I.fillField("username","osmartinez")
-  I.fillField("password","Hackerox4")
+  I.fillField("username",normalUserCredentials.username)
+  I.fillField("password",normalUserCredentials.password)
   I.click('Acceder')
   I.see("MENÚ PRINCIPAL")
 });

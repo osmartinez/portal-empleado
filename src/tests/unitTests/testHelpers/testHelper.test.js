@@ -3,21 +3,8 @@ const request = require('supertest');
 const http_config = require('../../../http_config')
 http_config.port = 6666
 const app = require('../../../index');
+const {normalUserCredentials, rrhhUserCredentials, firstLoginUserCredentials} = require('../../credentials')
 
-const normalUserCredentials = {
-    username: 'normal',
-    password: 'normal'
-}
-
-const rrhhUserCredentials = {
-    username: 'osmartinez',
-    password: '@@112233Aa'
-}
-
-const firstLoginUserCredentials = {
-    username: 'first',
-    password: 'first',
-}
 
 authenticatedNormalUser = request.agent(app);
 before((done) => {
