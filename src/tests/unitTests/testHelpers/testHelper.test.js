@@ -12,7 +12,7 @@ const normalUserCredentials = {
 
 const rrhhUserCredentials = {
     username: 'osmartinez',
-    password: 'Hackerox4'
+    password: '@@112233Aa'
 }
 
 const firstLoginUserCredentials = {
