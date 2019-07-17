@@ -1,7 +1,9 @@
 FROM node:alpine
 
-EXPOSE 4000
+ARG PUERTO
+ENV PUERTO ${PUERTO}
 
+EXPOSE ${PUERTO}
 WORKDIR /var/www/
 COPY package.json /var/www/
 RUN npm install
