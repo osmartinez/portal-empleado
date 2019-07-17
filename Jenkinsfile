@@ -4,13 +4,13 @@ pipeline {
     stage('Build') {
       steps {
         sh '''docker stop portal-empleado && docker rm portal-empleado
-docker build -t portal-empleado -f Dockerfile .
-docker run --net mynet --name portal-empleado -p 5555:5555 portal-empleado node /var/www/index.js &'''
+docker build -t portal-empleado --build-arg PUERTO=5555 -f Dockerfile .
+docker run --net mynet --name portal-empleado -p 5555:5555 portal-empleado node /var/www/index.js 5555 &'''
       }
     }
     stage('Test') {
       steps {
-        sh '''docker build -t portal-empleado-test --build-arg puerto=9999 -f Dockerfile.test .
+        sh '''docker build -t portal-empleado-test --build-arg PUERTO=9999 -f Dockerfile.test .
 docker run  --rm portal-empleado-test'''
       }
     }
