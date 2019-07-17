@@ -34,9 +34,9 @@ docker stop portal-empleado && docker rm portal-empleado
     }
     stage('Deploy') {
       steps {
-        sh '''docker build --tag portal-empleado-green:$BUILD_NUMBER .
-docker stop portal-empleado-green && docker rm portal-empleado-green
-docker run --name portal-empleado-green -p 3000:3000 portal-empleado-green:$BUILD_NUMBER node /var/www/index.js 3000 &
+        sh '''docker build --tag portal-empleado-blue:$BUILD_NUMBER .
+docker stop portal-empleado-blue && docker rm portal-empleado-blue
+docker run --name portal-empleado-blue -p 3000:3000 portal-empleado-blue:$BUILD_NUMBER node /var/www/index.js 3000 &
 '''
       }
     }
