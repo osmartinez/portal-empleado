@@ -3,7 +3,6 @@ const request = require('supertest');
 const http_config = require('../../../http_config')
 http_config.port = 6666
 const app = require('../../../index');
-console.log(http_config)
 
 const normalUserCredentials = {
     username: 'normal',

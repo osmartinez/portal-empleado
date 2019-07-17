@@ -42,7 +42,7 @@ describe('Probando permisos de usuario normal', function (done) {
 
     it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
         authenticatedNormalUser.get('/auth/login')
-            .expect(200, done);
+            .expect(302, done);
     });
 
     it('Debería desloggear y redireccionar a la página de acceso', (done) => {
@@ -52,32 +52,6 @@ describe('Probando permisos de usuario normal', function (done) {
     });
 });
 
-/**
- * Probamos que un usuario RRHH puede acceder al dashboard y a Administración RRHH
- * PRobamos que un usuario RRHH no puede acceder a la página de login puesto que ya esta loggeado, sí que puede acceder a logout
- */
-describe('Probando permisos de usuario RRHH', function (done) {
-    it('Debería cargar el dashboard', (done) => {
-        authenticatedRRHHUser.get('/dashboard')
-            .expect(302, done);
-    });
-
-    it('Debería cargar la página de RRHH', (done) => {
-        authenticatedRRHHUser.get('/rrhh')
-            .expect(302, done);
-    });
-
-    it('Debería redireccionar a dashboard puesto que ya esta logeado', (done) => {
-        authenticatedRRHHUser.get('/auth/login')
-            .expect(200, done);
-    });
-
-    it('Debería deslogear y redireccionar a la página de acceso', (done) => {
-        authenticatedRRHHUser.get('/auth/logout')
-            .expect('Location', '/auth/login')
-            .expect(302, done);
-    });
-});
 
 /**
  * Probamos que un usuario que acaba de iniciar sesion por primera vez no puede acceder a ningun recurso 
@@ -97,7 +71,7 @@ describe('Probando permisos de usuario first-time-login', function (done) {
 
     it('Debería poder acceder a la página de cambio de clave', (done) => {
         authenticatedFirstLoginUser.get('/dashboard/cambiar_clave')
-            .expect(302, done);
+            .expect(200, done);
     });
 
     it('Debería deslogear y redireccionar a la página de acceso', (done) => {
