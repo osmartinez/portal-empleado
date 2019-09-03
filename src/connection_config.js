@@ -2,12 +2,12 @@ const config =
 {
     authentication: {
         options: {
-            userName: 'oscar_user_db', // update me
-            password: '@@112233Aa' // update me
+            userName: 'oscar', // update me
+            password: 'Oeseceaerre2' // update me
         },
         type: 'default'
     },
-    server: 'somos-arneplant.database.windows.net', // update me
+    server: 'portal-empleado.database.windows.net', // update me
     options:
     {
         database: 'portal_empleado', //update me
