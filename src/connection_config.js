@@ -10,7 +10,7 @@ const config =
     server: 'somos-arneplant.database.windows.net', // update me
     options:
     {
-        database: 'portal_empleado', //update me
+        database: 'somos-arneplant', //update me
         encrypt: true,
         rowCollectionOnRequestCompletion: true,
         useColumnNames: true // For easier JSON formatting
