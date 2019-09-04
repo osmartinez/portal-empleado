@@ -35,7 +35,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
             const pwd = req.user.Password
             req.logOut()
 
-            let url = 'http://213.199.134.15:4000/auth/loginInternal?user='+username+'&pwd='+ pwd
+            let url = 'http://213.199.134.15:4000/auth/loginInternal?user='+username+'&pwd='+pwd
             console.log(url)
             res.redirect(url)
         }
