@@ -31,7 +31,7 @@ router.get('/loginInternal',isNotLoggedIn,(req,res,next)=>{
 
 router.post('/login',isNotLoggedIn, (req,res,next)=>{
     console.log(req.body)
-    passport.authenticate('local.login',{
+    passport.authenticate('local.login', {
         failureRedirect: '/auth/login',
         successRedirect: '/dashboard',
         failureFlash: true,
